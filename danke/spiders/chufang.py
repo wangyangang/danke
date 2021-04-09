@@ -1,5 +1,4 @@
 import scrapy
-import arrow
 import os
 import math
 import requests
