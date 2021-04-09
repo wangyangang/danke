@@ -4,6 +4,8 @@ import sqlite3
 import pandas as pd
 import os
 
+from danke.items import ChufangContractItem, ChufangRenterItem, ChufangUrgencyItem
+
 
 class ChufangPipeline:
     @classmethod
@@ -39,6 +41,16 @@ class ChufangPipeline:
     def process_item(self, item, spider):
         try:
             self.insert(item)
+            if isinstance(item, ChufangContractItem):
+                msg = '保存合同 页码：' + str(item['page']) + ' 序号：' + str(item['index']) + \
+                      ' 合同编号：' + str(item['contract_num']) + ' 完成'
+                print(msg)
+            elif isinstance(item, ChufangRenterItem):
+                msg = '保存租户： ' + str(item['detail_id']) + ' 电话：' + str(item['phone']) + ' 完成'
+                print(msg)
+            elif isinstance(item, ChufangUrgencyItem):
+                msg = '保存紧急联系人：' + str(item['detail_id']) + ' 电话：' + str(item['phone']) + ' 完成'
+                print(msg)
         except Exception as e:
             print('保存失败-------------')
             print(e)
