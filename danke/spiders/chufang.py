@@ -165,7 +165,7 @@ class DkSpider(scrapy.Spider):
             else:
                 renter = ''
 
-            manage_state = row.xpath('./td[8]//text()').get()  # 管理状态
+            manage_state = row.xpath('./td[8]//text()').getall()  # 管理状态
             if manage_state:
                 if len(manage_state) == 1:
                     manage_state = manage_state[0].strip()
@@ -254,7 +254,7 @@ class DkSpider(scrapy.Spider):
         urgency_mobile = response.xpath('//p[@id="lego-urgencyMobile"]/text()').get()
         if urgency_mobile:
             urgency_mobile = urgency_mobile.strip()
-        item = ChufangRenterItem()
+        item = ChufangUrgencyItem()
         item['detail_id'] = detail_id
         item['phone'] = urgency_mobile
         yield item

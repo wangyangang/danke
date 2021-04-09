@@ -103,7 +103,7 @@ class ChufangPipeline:
         sql = 'select detail_id, contract_num, department, seller, approver, business_circle, maintainer, ' \
               'renter, manage_state, approval, state, sign_reward_state, monthly_pay_method, ' \
               'income_state, business_state, sign_date, rent_start_date from chufang_contract ' \
-              'where city=? and start_date=? order by page, _index'
+              'where city=? and start_date=? order by CAST(page as DECIMAL), CAST(_index as DECIMAL)'
         params = (city, sign_date_lower)
         self.cursor.execute(sql, params)
         contracts = self.cursor.fetchall()
