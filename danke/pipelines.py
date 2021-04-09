@@ -99,8 +99,6 @@ class ChufangPipeline:
         num = len(contracts)
         print('共%d条' % num)
         for contract_index, contract in enumerate(contracts):
-            print(contract_index + 1, num)
-
             detail_id = contract[0]
             renter_sql = 'select phone from chufang_renter where detail_id=?'
             self.cursor.execute(renter_sql, (detail_id,))
